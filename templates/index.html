@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home Appraisal</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Home Appraisal System">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/map.css') }}"/>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script src="https://use.fontawesome.com/releases/v6.2.0/js/all.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>House Price Evaluation System</h1>
+		</header>
+
+		<div class="user-container">
+			<div class="left-side">
+				<p class="title">1. Select building type</p>
+				<button class="button" onclick="setActiveButton(this)">Building</button>
+				<button class="button" onclick="setActiveButton(this)">Apartment</button>
+				<button class="button" onclick="setActiveButton(this)">House</button>
+			</div>
+			
+			<div class="middle-side">
+				<p class="title">2. Provide house features</p>
+				<div id="building">
+					<div class="input-field">
+						<label>地址</label>
+						<input type="text" name="building-address">
+					</div>
+					<div class="input-field">
+						<label>屋齡</label>
+						<input type="text" name="building-age">
+					</div>
+					<div class="input-field">
+						<label>主建物面積</label>
+						<input type="text" name="building-area">
+					</div>
+				</div>
+				<div id="apartment">
+					<div class="input-field">
+						<label>地址</label>
+						<input type="text" name="building-address">
+					</div>
+					<div class="input-field">
+						<label>屋齡</label>
+						<input type="text" name="building-age">
+					</div>
+					<div class="input-field">
+						<label>房屋層數</label>
+						<input type="text" name="house-floors">
+					</div>
+					<div class="input-field">
+						<label>有無車位</label>
+						<input type="text" name="house-parking">
+					</div>
+				</div>
+				<div id="house">
+					<div class="input-field">
+						<label>地址</label>
+						<input type="text" name="building-address">
+					</div>
+					<div class="input-field">
+						<label>屋齡</label>
+						<input type="text" name="building-age">
+					</div>
+					<div class="input-field">
+						<label>容積率</label>
+						<input type="text" name="apartment-far">
+					</div>
+					<div class="input-field">
+						<label>土地移轉總面積(坪)</label>
+						<input type="text" name="apartment-land-area">
+					</div>
+					<div class="input-field">
+						<label>建物移轉總面積(坪)</label>
+						<input type="text" name="apartment-building-area">
+					</div>
+				</div>
+			</div>
+			
+			<div class="right-side">
+				<button id="submitBtn" >Appraise</button>
+				<div id="loader" class="loader"></div>
+			</div>
+			
+		</div>
+		
+		<main>
+			<div id="map"></div>
+			<div id="evaluation-container">
+				<div class="eval-title">Evaluation Result</div>
+				<div class="table-wrapper">
+					<table id="eval-table">
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				<div class="eval-desc">
+				</div>
+			</div>
+			
+		</main>
+	</div>
+	<script src="{{url_for('static', filename='scripts/map.js')}}"></script>
+	<script src="{{url_for('static', filename='scripts/user.js')}}"></script>
+	<script src="{{url_for('static', filename='scripts/script.js')}}"></script>
+	
+</body>
+</html>
+ 
