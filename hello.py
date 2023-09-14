@@ -38,7 +38,7 @@ def hello():
 def process(data):
     # data = json.loads('data')
     data = ast.literal_eval(data)
-    # print(data)
+    print(data)
     # process the data using Python code
     return data
 
