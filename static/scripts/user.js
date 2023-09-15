@@ -1,3 +1,4 @@
+
 function setActiveButton(button) {
     var buttons = document.getElementsByClassName('button');
     for (var i = 0; i < buttons.length; i++) {
@@ -27,27 +28,29 @@ function sleep(ms) {
 }
 
 async function sendData() {
+    var result = "";
     var formData = collectFormData(); // save collected data to formData
     console.log(formData);
     var loader = document.getElementById('loader');
     loader.style.display = 'block';
     var submitBtn = document.getElementById('submitBtn');
     submitBtn.style.display = 'none';
-
     // await sleep(5000);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', `/process/${JSON.stringify(formData)}`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    console.error('Request failed. Status: ');
+    // console.error('Request failed. Status: ');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             loader.style.display = 'none';
 
             if (xhr.status === 200) {
             // 處理伺服器回傳的資料
+                // console.log(data);
                 console.log(xhr.responseText);
                 var response = JSON.parse(xhr.responseText);
             // 處理回傳資料的其他操作
+
             } else {
             // 處理請求失敗的情況
                 console.error('Request failed. Status: ' + xhr.status);
@@ -55,13 +58,14 @@ async function sendData() {
         }
     }
     xhr.send();
-
     
     // await sleep(5000);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
-    var response = "";
-    var result = parseResponse(response);
+    // var response = JSON.parse(xhr.responseText);
+    console.log(result);
+    var result = parseResponse(result);
+    
     
     // add marker to map
     initMap(result['map']);

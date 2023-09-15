@@ -7,6 +7,8 @@ import numpy as np
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
 # House => addr, age, far, land transfer, house transfer
+
+# inputData = {'type':building, 'x座標':0, 'y座標':0, 'house_age':10,...}
 def getSimilarData(inputData):
     if inputData['type'] == 'apartment':
         data = pd.read_csv('./final_inference/all_apartment.csv')
@@ -23,11 +25,9 @@ def getSimilarData(inputData):
     
     inputLoc = [0, 0] # Temporal, need to be turn by inputData['addr']
     
-    # top 30 closest id 
     groupByDist = [] 
     selectByDist(data, groupNumList[0], inputLoc, groupByDist)
     
-    # Top 20 age
     groupByAge = []
     selectByAge(groupByDist, groupNumList[1], inputData['age'], groupByAge)
     
@@ -37,15 +37,18 @@ def getSimilarData(inputData):
         
         groupByParking = []
         selectByParking(groupByTotalFloor, groupNumList[3], inputData['car'], groupByParking)
+        return groupByParking
     elif inputData['type'] == 'building':
         groupByArea = []
         selectByArea(groupByAge, groupNumList[2], inputData['area'], groupByArea)
+        return groupByArea
     else:
         groupByFar = []
         selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
         
         groupByLandTransfer = []
         selectByLandTransfer(groupByFar, groupNumList[3], inputData['trans1'], groupByLandTransfer)
+        return groupByLandTransfer
         
             
 

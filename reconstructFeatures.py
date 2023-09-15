@@ -12,7 +12,49 @@ NumFeatList = ['土地移轉總面積(坪)','建物移轉總面積(坪)','建物
         'x座標','y座標','larea_utilize_ratio','park_cnt_flat','park_cnt_mach',
         'n_a_10', 'n_a_50', 'n_a_100', 'n_a_250', 'n_a_500', 'n_a_1000', 'n_a_5000', 'n_a_10000','n_c_10', 'n_c_50', 'n_c_100', 'n_c_250', 'n_c_500', 'n_c_1000', 'n_c_5000', 'n_c_10000',
         'area_kilometer','population_density','house_price_index','unemployment_rate','econ_rate','lending_rate','land_tx_count','land_price','steel_id']
-
+# Inputs: 
+# Building => addr, age, area
+# apartment => addr, age, total_floor, parking_area
+# House => addr, age, far, land transfer, house transfer
 # Fill missing feature, Numerical feature => average, Catagorical data => the most catagory
 def fillMissingFeature(inputData, groupData):
-    for idx,item 
+    tmp = groupData.iloc[0]
+    tmp['x座標'] = inputData['x座標']
+    tmp['y座標'] = inputData['y座標']
+    tmp['house_age'] = inputData['house_age']
+    
+    if inputData['type'] == 'apartment':
+        tmp['total_floor'] = inputData['floor']
+        tmp['車位移轉總面積(坪)'] = inputData['car']
+        # Get most common for catFeat, mean for numFeat
+        for catFeat in CatFeatList:
+            tmp[catFeat] = groupData[catFeat].mode()[0] 
+        
+        for numFeat in NumFeatList:
+            if numFeat != 'total_floor' or '車位移轉總面積(坪)':
+                tmp[numFeat] = groupData[numFeat].mean()
+        
+    elif inputData['type'] == 'building':
+        tmp['主建物面積'] = inputData['area']
+        
+        for catFeat in CatFeatList:
+            tmp[catFeat] = groupData[catFeat].mode()[0]
+            
+        for numFeat in NumFeatList:
+            if numFeat != '主建物面積':
+                tmp[numFeat] = groupData[numFeat].mean()
+    else: # House
+        tmp['far'] = inputData['far']
+        tmp['土地移轉總面積(坪)'] = inputData['trans1']
+        
+        for catFeat in CatFeatList:
+            tmp[catFeat] = groupData[catFeat].mode()[0]
+            
+        for numFeat in NumFeatList:
+            if numFeat != 'far' or '土地移轉總面積(坪)':
+                tmp[numFeat] = groupData[numFeat].mean()
+    
+    return tmp
+
+def getLatLong():
+    pass
