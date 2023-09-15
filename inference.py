@@ -4,6 +4,7 @@ import joblib
 
 def inference(type,inferenceData):
     inferencePricePin = inferenceData['price_pin']
+    inferenceData.to_csv('./sample.csv')
     inferenceData = inferenceData.drop('price_pin')
     if type == 'apartment':
         type = '公寓'
@@ -18,5 +19,6 @@ def inference(type,inferenceData):
                         
                         metric = 'mape')
     gbm = joblib.load(f'./lgbm/{type}all.pkl')
-    pred = gbm.predict(inferenceData.reshape(-1, 1))
+    pred = gbm.predict(inferenceData)
+    print(inferencePricePin)
     return pred
