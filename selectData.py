@@ -24,30 +24,29 @@ def getSimilarData(inputData):
     # InputData will contain a Chinese address, need to be convert to (lat, long) either TWD97 or WGS84
     
     inputLoc = [0, 0] # Temporal, need to be turn by inputData['addr']
-    
-    groupByDist = [] 
-    selectByDist(data, groupNumList[0], inputLoc, groupByDist)
+    groupByDist = []
+    groupByDist = selectByDist(data, groupNumList[0], [inputData['x座標'], inputData['y座標']], groupByDist)
     
     groupByAge = []
-    selectByAge(groupByDist, groupNumList[1], inputData['age'], groupByAge)
+    groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['age'], groupByAge)
     
     if inputData['type'] == 'apartment':
         groupByTotalFloor = []
-        selectByTotalFloor(groupByAge, groupNumList[2], inputData['floor'], groupByTotalFloor )
+        groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['floor'], groupByTotalFloor )
         
         groupByParking = []
-        selectByParking(groupByTotalFloor, groupNumList[3], inputData['car'], groupByParking)
+        groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['car'], groupByParking)
         return groupByParking
     elif inputData['type'] == 'building':
         groupByArea = []
-        selectByArea(groupByAge, groupNumList[2], inputData['area'], groupByArea)
+        groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['area'], groupByArea)
         return groupByArea
     else:
         groupByFar = []
-        selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
+        groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
         
         groupByLandTransfer = []
-        selectByLandTransfer(groupByFar, groupNumList[3], inputData['trans1'], groupByLandTransfer)
+        groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['trans1'], groupByLandTransfer)
         return groupByLandTransfer
         
             
@@ -62,6 +61,7 @@ def selectByDist(data, groupNum, inputLoc, groupByDist):
     dist = np.array(dist)
     groupByDist = np.argpartition(dist,groupNum)
     groupByDist = data.iloc[groupByDist[:groupNum]]
+    return groupByDist
     
 # Select data by house age 
 def selectByAge(data, groupNum, inputAge, groupByAge):
@@ -73,7 +73,7 @@ def selectByAge(data, groupNum, inputAge, groupByAge):
     age = np.array(age)
     groupByAge = np.argpartition(age, groupNum)
     groupByAge = data.iloc[groupByAge[:groupNum]]
-
+    return groupByAge
 # Select data by building area
 def selectByArea(data, groupNum, inputArea, groupByArea):
     area = []
@@ -84,7 +84,7 @@ def selectByArea(data, groupNum, inputArea, groupByArea):
     area = np.array(area)
     groupByArea = np.argpartition(area, groupByArea)
     groupByArea = data.iloc[groupByArea[:groupNum]]
-
+    return groupByArea
 # Select data by floor area ratio
 def selectByFar(data, groupNum, inputFar, groupByFar):
     far = []
@@ -95,7 +95,7 @@ def selectByFar(data, groupNum, inputFar, groupByFar):
     far = np.array(far)
     groupByFar = np.argpartition(far, groupNum)
     groupByFar = data.iloc[groupByFar[:groupNum]]
-    
+    return groupByFar
 # Select data by total floor
 def selectByTotalFloor(data, groupNum, inputTotalFloor, groupByTotalFloor):
     totalFloor = []
@@ -106,7 +106,7 @@ def selectByTotalFloor(data, groupNum, inputTotalFloor, groupByTotalFloor):
     totalFloor = np.array(totalFloor)
     groupByTotalFloor = np.argpartition(totalFloor, groupNum)
     groupByTotalFloor = data.iloc[groupByTotalFloor[:groupNum]]
-    
+    return groupByTotalFloor
 # Select data by parking
 def selectByParking(data, groupNum, inputParking, groupByParking):
     parking = []
@@ -117,7 +117,7 @@ def selectByParking(data, groupNum, inputParking, groupByParking):
     parking = np.array(parking)
     groupByParking = np.argpartition(parking, groupNum)
     groupByParking = data.iloc[groupByParking[:groupNum]]
-    
+    return groupByParking
 # Select data by land transfer
 def selectByLandTransfer(data, groupNum, inputLandTransfer, groupByLandTransfer):
     landTransfer = []
@@ -125,6 +125,7 @@ def selectByLandTransfer(data, groupNum, inputLandTransfer, groupByLandTransfer)
         tmpLandTransfer = item['土地移轉總面積(坪)']
         tmp = abs(tmpLandTransfer - inputLandTransfer)
         landTransfer.append(tmp)
-    landTransfer = np.append(landTransfer)
+    landTransfer = np.array(landTransfer)
     groupByLandTransfer = np.argpartition(landTransfer, groupNum)
     groupByLandTransfer = data.iloc[groupByLandTransfer[:groupNum]]
+    return groupByLandTransfer

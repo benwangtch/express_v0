@@ -21,7 +21,7 @@ def fillMissingFeature(inputData, groupData):
     tmp = groupData.iloc[0]
     tmp['x座標'] = inputData['x座標']
     tmp['y座標'] = inputData['y座標']
-    tmp['house_age'] = inputData['house_age']
+    tmp['house_age'] = inputData['age']
     
     if inputData['type'] == 'apartment':
         tmp['total_floor'] = inputData['floor']

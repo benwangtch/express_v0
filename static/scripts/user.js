@@ -27,8 +27,13 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function debug(data) {
+    
+}
+
 async function sendData() {
     var result = "";
+    var response = "";
     var formData = collectFormData(); // save collected data to formData
     console.log(formData);
     var loader = document.getElementById('loader');
@@ -48,7 +53,9 @@ async function sendData() {
             // 處理伺服器回傳的資料
                 // console.log(data);
                 console.log(xhr.responseText);
-                var response = JSON.parse(xhr.responseText);
+                response = xhr.responseText;
+                // response = JSON.parse(xhr.responseText);
+                // console.log(response);
             // 處理回傳資料的其他操作
 
             } else {
@@ -59,11 +66,11 @@ async function sendData() {
     }
     xhr.send();
     
-    // await sleep(5000);
+    await sleep(50);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
     // var response = JSON.parse(xhr.responseText);
-    console.log(result);
+    console.log(response);
     var result = parseResponse(result);
     
     
