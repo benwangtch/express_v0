@@ -173,12 +173,12 @@ function parseResponse(response) {
         ['61289', '169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '8164.0', '4.679535', '112.0', '307335.567368'],
     ]
 
-      var res = {
-        'map': properties,
-        'table': samples
-      }
+    var res = {
+    'map': properties,
+    'table': samples
+    }
 
-      return res;
+    return res;
 }
 
 function initTable(data) {
