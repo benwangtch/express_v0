@@ -30,10 +30,10 @@ def process(data):
     # process the data using Python code
     groupData = getSimilarData(inputData)
     inferenceData = fillMissingFeature(inputData, groupData)
-    
-    ouputPrice = inference(inputData['type'], inferenceData)
-    print(ouputPrice)
-    return data
+    output = inference(inputData['type'], inferenceData)
+    # print("The output price is: ", output['預測價格'])
+    print(output)
+    return output
 
 if __name__=='__main__':
     app.run(debug=True)
