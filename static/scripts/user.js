@@ -29,7 +29,7 @@ function sleep(ms) {
 
 
 async function sendData() {
-    var result = "";
+    var groupData="";
     var response = "";
     var formData = collectFormData(); // save collected data to formData
     console.log(formData);
@@ -50,7 +50,7 @@ async function sendData() {
             // 處理伺服器回傳的資料
                 // console.log(xhr.responseText);
                 response = JSON.parse(xhr.responseText);
-                console.log(response);
+                groupData = JSON.parse(response['groupData'])
             // 處理回傳資料的其他操作
 
             } else {
@@ -64,9 +64,8 @@ async function sendData() {
     await sleep(5000);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
-    // var response = JSON.parse(xhr.responseText);
-    console.log(response['預測價格']);
-    var result = parseResponse(result);
+    
+    var result = parseResponse(groupData,response);
     
     
     // add marker to map
@@ -74,7 +73,7 @@ async function sendData() {
 
     // disply result as a form
     initTable(result['table']);
-    initOutput(result['table']);
+    initOutput(result['input']);
 }
 
 
@@ -121,7 +120,7 @@ function collectFormData() {
     
 }
 
-function parseResponse(response) {
+function parseResponse(groupData, response) {
     const properties = [
         {
           address: "台南市東區青年路454號",
@@ -163,20 +162,44 @@ function parseResponse(response) {
           },
         },
     ];
+    var renderFeatures = ['x座標', 'y座標', 'far', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'n_c_1000', 'price_pin']
+    var outputGroupData = [
+        ['x座標', 'y座標', '容積率', '屋齡', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'YIMBY_1000', 'price_pin'],
+        ['169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '305803.863048'],
+        ['169776.988039', '2.543503e+06', '1.584118', '33.993155', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '297682.725384'],
+        ['169776.988039', '2.543503e+06', '1.584118', '33.993155', '3.023834', '3.483861', '6330.0', '4.679535', '112.0', '297682.725384'],
+        ['169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '6330.0', '4.679535', '112.0', '305803.863048'],
+        ['169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '8164.0', '4.679535', '112.0', '307335.567368'],
+    ];
+    var outputInputData = [
+        ['x座標', 'y座標', '容積率', '屋齡', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'YIMBY_1000', 'price_pin'],
+        ['169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '305803.863048'],
+        ];
+    for (var i = 0; i < outputGroupData[0].length; i++){
+        console.log(renderFeatures[i])
+        var obj = groupData[renderFeatures[i]];
+        var j = 1;
+        for (var key in obj){
+          var value = obj[key];
+          outputGroupData[j][i] = value;
+          
+          j++;
+        }
+    }
 
-    const samples = [
-        ['ID', 'x座標', 'y座標', '容積率', '屋齡', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'YIMBY_1000', 'price/pin'],
-        ['61292', '169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '305803.863048'],
-        ['68233', '169776.988039', '2.543503e+06', '1.584118', '33.993155', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '297682.725384'],
-        ['68232', '169776.988039', '2.543503e+06', '1.584118', '33.993155', '3.023834', '3.483861', '6330.0', '4.679535', '112.0', '297682.725384'],
-        ['61291', '169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '6330.0', '4.679535', '112.0', '305803.863048'],
-        ['61289', '169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '8164.0', '4.679535', '112.0', '307335.567368'],
-    ]
+    for (var i = 0; i < renderFeatures.length; i++){
+        var obj = response['output'][renderFeatures[i]];
+        
+        outputInputData[1][i] = obj;
+        console.log(obj);
+        
+    }
 
     var res = {
     'map': properties,
-    'table': samples
-    }
+    'table': outputGroupData,
+    'input':outputInputData
+    };
 
     return res;
 }

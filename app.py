@@ -27,12 +27,15 @@ def process(data):
     # Get (lat, long) by certain API's
     # inputData = getLatLong(data) 
     inputData = {'type':'house','x座標':169784.98804265473,'y座標':2543493.999829864, 'age':33, 'far':1.58,'trans1':3.024 }
-    # process the data using Python code
+    
     groupData = getSimilarData(inputData)
     inferenceData = fillMissingFeature(inputData, groupData)
     output = inference(inputData['type'], inferenceData)
-    # print("The output price is: ", output['預測價格'])
-    print(output)
+    
+    groupData = groupData.to_json()
+
+    output={'groupData':groupData,'output':output }
+    
     return output
 
 if __name__=='__main__':

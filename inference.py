@@ -4,11 +4,8 @@ import joblib
 import json
 
 def inference(type,inferenceData):
-    # inferencePricePin = inferenceData['price_pin']
     
-    # del inferenceData['price_pin']
-    # inferenceData = inferenceData.transpose()
-    print("-----The shape is", inferenceData.shape)
+    # print("-----The shape is", inferenceData.shape)
     inferenceData.to_csv('./sample.csv', index=False)
 
     if type == 'apartment':
@@ -26,6 +23,5 @@ def inference(type,inferenceData):
     gbm = joblib.load(f'./lgbm/{type}all.pkl')
     pred = gbm.predict(inferenceData)
     
-    output = {'x座標':inferenceData['x座標'][0],'y座標':inferenceData['y座標'][0],'容積率':inferenceData['far'][0], '屋齡':inferenceData['house_age'][0], '土地移轉總面積(坪)':inferenceData['土地移轉總面積(坪)'][0], '建物移轉總面積(坪)':inferenceData['建物移轉總面積(坪)'][0],'population_density':inferenceData['population_density'][0], '主建物面積':inferenceData['主建物面積'][0], 'YIMBY_1000':inferenceData['n_c_1000'][0],'預測價格':pred[0] }
-    # output = json.dumps(output)
+    output = {'x座標':inferenceData['x座標'][0],'y座標':inferenceData['y座標'][0],'far':inferenceData['far'][0], 'house_age':inferenceData['house_age'][0], '土地移轉總面積(坪)':inferenceData['土地移轉總面積(坪)'][0], '建物移轉總面積(坪)':inferenceData['建物移轉總面積(坪)'][0],'population_density':inferenceData['population_density'][0], '主建物面積':inferenceData['主建物面積'][0], 'n_c_1000':inferenceData['n_c_1000'][0],'price_pin':pred[0] }
     return output
