@@ -1,3 +1,4 @@
 *.csv
 final_inference/
 env/
+*.txt

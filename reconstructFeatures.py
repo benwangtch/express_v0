@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import math 
+import requests
 
 allFeatList = ['city_nm2', 'town_nm', '交易車位', '小坪數物件', '建物型態', '主要用途', '主要建材', '有無管理組織', 
     '車位類別', '電梯', 'firstfloor_ind', 'shop_ind', 'building_type2', 'col2_ind', 'villname', 
@@ -65,4 +66,5 @@ def fillMissingFeature(inputData, groupData):
     return tmp
 
 def getLatLong():
+    
     pass
