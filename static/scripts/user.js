@@ -50,6 +50,7 @@ async function sendData() {
             // 處理伺服器回傳的資料
                 // console.log(xhr.responseText);
                 response = JSON.parse(xhr.responseText);
+                console.log(response)
                 groupData = JSON.parse(response['groupData'])
             // 處理回傳資料的其他操作
 
@@ -61,7 +62,7 @@ async function sendData() {
     }
     xhr.send();
     
-    await sleep(5000);
+    await sleep(7000);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
     
@@ -176,7 +177,6 @@ function parseResponse(groupData, response) {
         ['169784.988043', '2.543494e+06', '1.584118', '33.232033', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '305803.863048'],
         ];
     for (var i = 0; i < outputGroupData[0].length; i++){
-        console.log(renderFeatures[i])
         var obj = groupData[renderFeatures[i]];
         var j = 1;
         for (var key in obj){
@@ -186,7 +186,7 @@ function parseResponse(groupData, response) {
           j++;
         }
     }
-
+    console.log(response)
     for (var i = 0; i < renderFeatures.length; i++){
         var obj = response['output'][renderFeatures[i]];
         

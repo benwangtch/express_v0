@@ -29,7 +29,14 @@ def process(data):
     # inputData = {'type':'house','x座標':169784.98804265473,'y座標':2543493.999829864, 'age':33, 'far':1.58,'trans1':3.024 }
     
     groupData = getSimilarData(inputData)
+    
+    groupData.to_csv('./sample_group_0.csv') # For Case study
+    
     inferenceData = fillMissingFeature(inputData, groupData)
+    
+    outputInf = pd.DataFrame(inferenceData) # For Case study
+    outputInf.to_csv('./inference_sample_0.csv') # For Case study
+    
     output = inference(inputData['type'], inferenceData)
     
     groupData = groupData.to_json()

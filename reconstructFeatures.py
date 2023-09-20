@@ -34,8 +34,8 @@ def fillMissingFeature(inputData, groupData):
     tmp['house_age'] = float(inputData['age'])
     
     if inputData['type'] == 'apartment':
-        tmp['total_floor'] = inputData['floor']
-        tmp['車位移轉總面積(坪)'] = inputData['car']
+        tmp['total_floor'] = float(inputData['floor'])
+        tmp['車位移轉總面積(坪)'] = float(inputData['car'])
         # Get most common for catFeat, mean for numFeat
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0] 
@@ -45,7 +45,7 @@ def fillMissingFeature(inputData, groupData):
                 tmp[numFeat] = groupData[numFeat].mean()
         
     elif inputData['type'] == 'building':
-        tmp['主建物面積'] = inputData['area']
+        tmp['主建物面積'] = float(inputData['area'])
         
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0]
