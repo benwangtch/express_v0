@@ -22,11 +22,11 @@ def hello():
 
 @app.route('/process/<data>', methods=['POST'])
 def process(data):
-    data = ast.literal_eval(data)
+    inputData = ast.literal_eval(data)
     
     # Get (lat, long) by certain API's
-    # inputData = getLatLong(data) 
-    inputData = {'type':'house','x座標':169784.98804265473,'y座標':2543493.999829864, 'age':33, 'far':1.58,'trans1':3.024 }
+    inputData = getLatLong(inputData) 
+    # inputData = {'type':'house','x座標':169784.98804265473,'y座標':2543493.999829864, 'age':33, 'far':1.58,'trans1':3.024 }
     
     groupData = getSimilarData(inputData)
     inferenceData = fillMissingFeature(inputData, groupData)

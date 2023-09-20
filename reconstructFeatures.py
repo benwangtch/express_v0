@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-import math 
 import requests
+import math
 
 allFeatList = ['city_nm2', 'town_nm', '交易車位', '小坪數物件', '建物型態', '主要用途', '主要建材', '有無管理組織', 
     '車位類別', '電梯', 'firstfloor_ind', 'shop_ind', 'building_type2', 'col2_ind', 'villname', 
@@ -28,11 +28,10 @@ NumFeatList = ['土地移轉總面積(坪)','建物移轉總面積(坪)','建物
 # Fill missing feature, Numerical feature => average, Catagorical data => the most catagory
 def fillMissingFeature(inputData, groupData):
     
-    
     tmp  = pd.DataFrame(columns=allFeatList, index=[0])
-    tmp['x座標'] = inputData['x座標']
-    tmp['y座標'] = inputData['y座標']
-    tmp['house_age'] = inputData['age']
+    tmp['x座標'] = float(inputData['x座標'])
+    tmp['y座標'] = float(inputData['y座標'])
+    tmp['house_age'] = float(inputData['age'])
     
     if inputData['type'] == 'apartment':
         tmp['total_floor'] = inputData['floor']
@@ -42,7 +41,7 @@ def fillMissingFeature(inputData, groupData):
             tmp[catFeat] = groupData[catFeat].mode()[0] 
         
         for numFeat in NumFeatList:
-            if numFeat != 'total_floor' or '車位移轉總面積(坪)':
+            if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='total_floor' and numFeat !='車位移轉總面積(坪)':
                 tmp[numFeat] = groupData[numFeat].mean()
         
     elif inputData['type'] == 'building':
@@ -52,19 +51,40 @@ def fillMissingFeature(inputData, groupData):
             tmp[catFeat] = groupData[catFeat].mode()[0]
             
         for numFeat in NumFeatList:
-            if numFeat != '主建物面積':
+            if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='主建物面積':
                 tmp[numFeat] = groupData[numFeat].mean()
     else: # House
-        tmp['far'] = inputData['far']
-        tmp['土地移轉總面積(坪)'] = inputData['trans1']
+        tmp['far'] = float(inputData['far'])
+        tmp['土地移轉總面積(坪)'] = float(inputData['trans1'])
         
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0]
         for numFeat in NumFeatList:
-            if numFeat != 'far' or '土地移轉總面積(坪)':
+            if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='far' and numFeat !='土地移轉總面積(坪)':
                 tmp[numFeat] = groupData[numFeat].mean()
     return tmp
 
-def getLatLong():
-    
-    pass
+# Using google API for converting the address => (lat, lon)
+def getLatLong(inputData):
+    addr =inputData['addr']
+    res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={addr}&key=AIzaSyCkBm3LspfsTiKQUh7EmHQV8bkwHnVFff0')
+    resJson = res.json()
+    resJson = resJson['results'][0]
+    latlng = resJson['geometry']['location']
+    print(latlng['lat'],latlng['lng'])
+    lat, lng = Wgs84toTwd97(latlng['lat'],latlng['lng'] )
+    inputData['x座標'] = lng
+    inputData['y座標'] = lat   
+    print(inputData)
+    return inputData
+
+# Formula for converting between TWD97 and WGS84
+def Twd97toWgs84(x, y):
+    ty = y * 0.00000899823754
+    tx = 121 + (x - 250000) * 0.000008983152841195214 / math.cos(math.radians(ty))
+    return(ty, tx)
+
+def Wgs84toTwd97(x,y):
+    tx = x/0.00000899823754
+    ty = (y-121)*math.cos(math.radians(x))/0.000008983152841195214 + 250000
+    return (tx, ty)

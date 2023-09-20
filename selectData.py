@@ -66,6 +66,7 @@ def selectByDist(data, groupNum, inputLoc, groupByDist):
 # Select data by house age 
 def selectByAge(data, groupNum, inputAge, groupByAge):
     age = []
+    inputAge = float(inputAge)
     for idx,item in data.iterrows():
         tmpAge = item['house_age']
         tmp = abs(tmpAge - inputAge)
@@ -88,6 +89,7 @@ def selectByArea(data, groupNum, inputArea, groupByArea):
 # Select data by floor area ratio
 def selectByFar(data, groupNum, inputFar, groupByFar):
     far = []
+    inputFar = float(inputFar)
     for idx,item in data.iterrows():
         tmpFar = item['far']
         tmp = abs(tmpFar - inputFar)
@@ -99,6 +101,7 @@ def selectByFar(data, groupNum, inputFar, groupByFar):
 # Select data by total floor
 def selectByTotalFloor(data, groupNum, inputTotalFloor, groupByTotalFloor):
     totalFloor = []
+    inputTotalFloor = float(inputTotalFloor)
     for idx,item in data.iterrows():
         tmpTotalFloor = item['total_floor']
         tmp = abs(tmpTotalFloor - inputTotalFloor)
@@ -110,6 +113,7 @@ def selectByTotalFloor(data, groupNum, inputTotalFloor, groupByTotalFloor):
 # Select data by parking
 def selectByParking(data, groupNum, inputParking, groupByParking):
     parking = []
+    inputParking = float(inputParking)
     for idx,item in data.iterrows():
         tmpParking = item['車位移轉總面積(坪)']
         tmp = abs(tmpParking - inputParking)
@@ -121,6 +125,7 @@ def selectByParking(data, groupNum, inputParking, groupByParking):
 # Select data by land transfer
 def selectByLandTransfer(data, groupNum, inputLandTransfer, groupByLandTransfer):
     landTransfer = []
+    inputLandTransfer = float(inputLandTransfer)
     for idx,item in data.iterrows():
         tmpLandTransfer = item['土地移轉總面積(坪)']
         tmp = abs(tmpLandTransfer - inputLandTransfer)

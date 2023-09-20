@@ -112,7 +112,7 @@ function collectFormData() {
             'type': "house",
             'addr': inputEmts[0].value,
             'age': inputEmts[1].value,
-            'floor': inputEmts[2].value,
+            'far': inputEmts[2].value,
             'trans1': inputEmts[3].value,
             'trans2': inputEmts[4].value,
         }
