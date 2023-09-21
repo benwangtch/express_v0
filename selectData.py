@@ -15,7 +15,7 @@ def getSimilarData(inputData):
         groupNumList = [30, 20, 10, 5]
     elif inputData['type'] == 'building':
         data = pd.read_csv('./final_inference/all_building.csv')
-        groupNumList = [20, 10, 5]
+        groupNumList = [8, 6, 5]
     else:
         data = pd.read_csv('./final_inference/all_house.csv')
         groupNumList = [30, 20, 10, 5]
@@ -78,12 +78,13 @@ def selectByAge(data, groupNum, inputAge, groupByAge):
 # Select data by building area
 def selectByArea(data, groupNum, inputArea, groupByArea):
     area = []
+    inputArea = float(inputArea)
     for idx,item in data.iterrows():
-        tmpArea = item['主建物面積']
+        tmpArea = float(item['主建物面積'])
         tmp = abs(tmpArea - inputArea)
         area.append(tmp)
     area = np.array(area)
-    groupByArea = np.argpartition(area, groupByArea)
+    groupByArea = np.argpartition(area, groupNum)
     groupByArea = data.iloc[groupByArea[:groupNum]]
     return groupByArea
 # Select data by floor area ratio

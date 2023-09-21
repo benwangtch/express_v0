@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import requests
 import math
+from math import degrees, tan, sin, cos, radians
+from convertCoord import LatLonToTWD97
 
 allFeatList = ['city_nm2', 'town_nm', '交易車位', '小坪數物件', '建物型態', '主要用途', '主要建材', '有無管理組織', 
     '車位類別', '電梯', 'firstfloor_ind', 'shop_ind', 'building_type2', 'col2_ind', 'villname', 
@@ -85,6 +87,10 @@ def Twd97toWgs84(x, y):
     return(ty, tx)
 
 def Wgs84toTwd97(x,y):
-    tx = x/0.00000899823754
-    ty = (y-121)*math.cos(math.radians(x))/0.000008983152841195214 + 250000
-    return (tx, ty)
+    c = LatLonToTWD97()
+    lat = radians(float(x))
+    lon = radians(float(y))
+    x, y = c.convert(lat, lon)
+    # tx = x/0.00000899823754
+    # ty = (y-121)*math.cos(math.radians(x))/0.000008983152841195214 + 250000
+    return (y, x)
