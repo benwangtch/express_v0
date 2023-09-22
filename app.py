@@ -24,9 +24,7 @@ def hello():
 def process(data):
     inputData = ast.literal_eval(data)
     
-    # Get (lat, long) by certain API's
-    inputData = getLatLong(inputData) 
-    # inputData = {'type':'house','x座標':169784.98804265473,'y座標':2543493.999829864, 'age':33, 'far':1.58,'trans1':3.024 }
+    inputData = getLatLong(inputData) # Convert from TWD97 to LatLon
     
     groupData = getSimilarData(inputData)
     
@@ -37,8 +35,9 @@ def process(data):
     outputInf = pd.DataFrame(inferenceData) # For Case study
     outputInf.to_csv('./inference_sample_0.csv', index=False) # For Case study
     
-    output = inference(inputData['type'], inferenceData)
-    
+    output = inference(inputData['type'], inferenceData, inputData)
+    # Get LatLon and addr for groupData to show on map
+    groupData = getGroupLatLon(groupData)
     groupData = groupData.to_json()
 
     output={'groupData':groupData,'output':output }

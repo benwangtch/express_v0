@@ -51,7 +51,7 @@ def TWD97ToLatLon(x, y):
     lon = lon0 + (Q5 - Q6 + Q7) / math.cos(fp)
 
     return [math.degrees(lat), math.degrees(lon)]
-class LatLonToTWD97(object):
+class Wsg84ToTWD97(object):
     """This object provide method for converting lat/lon coordinate to TWD97
     coordinate
 
@@ -120,7 +120,7 @@ class LatLonToTWD97(object):
 if __name__ == '__main__':
     from math import degrees
 
-    c = LatLonToTWD97()
+    c = Wsg84ToTWD97()
     lat = radians(float(25.0414391))
     lon = radians(float(121.5443622))
     print ('input lat/lon', degrees(lat), degrees(lon))
