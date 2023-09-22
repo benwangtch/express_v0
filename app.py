@@ -30,12 +30,12 @@ def process(data):
     
     groupData = getSimilarData(inputData)
     
-    groupData.to_csv('./sample_group_0.csv') # For Case study
+    groupData.to_csv('./sample_group_0.csv', index=False) # For Case study
     
     inferenceData = fillMissingFeature(inputData, groupData)
     
     outputInf = pd.DataFrame(inferenceData) # For Case study
-    outputInf.to_csv('./inference_sample_0.csv') # For Case study
+    outputInf.to_csv('./inference_sample_0.csv', index=False) # For Case study
     
     output = inference(inputData['type'], inferenceData)
     
