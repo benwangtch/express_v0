@@ -80,7 +80,7 @@ function buildContent(property) {
         <div>
             <i aria-hidden="true" class="fa fa-ruler fa-lg size" title="size"></i>
             <span class="fa-sr-only">size</span>
-            <span>${property.size} ft<sup>2</sup></span>
+            <span>${property.size} </span>
         </div>
         </div>
     </div>
@@ -88,18 +88,25 @@ function buildContent(property) {
   return content;
 }
 
-async function initMap(properties) {
+async function initMap(properties,lat,lon,zoom,notInit) {
   // Request needed libraries.
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
   const { LatLng } = await google.maps.importLibrary("core");
-  const center = new LatLng(23.7000, 121.0794);
+  const center = new LatLng(lat, lon);
   const map = new Map(document.getElementById("map"), {
-    zoom: 7.5,
+    zoom: zoom,
     center,
     mapId: "4504f8b37365c3d0",
   });
-
+  if(notInit){
+    var marker = new google.maps.Marker({
+      position: center,
+      title:"Input Location"
+    });
+    marker.setMap(map);
+  }
+  
   for (const property of properties) {
     const AdvancedMarkerElement = new google.maps.marker.AdvancedMarkerElement({
       map,
@@ -114,5 +121,5 @@ async function initMap(properties) {
   }
 }
 
-initMap(properties);
+initMap(properties,23.7000, 121.0794,7.5,false);
   

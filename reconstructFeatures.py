@@ -22,6 +22,14 @@ NumFeatList = ['土地移轉總面積(坪)','建物移轉總面積(坪)','建物
         'x座標','y座標','larea_utilize_ratio','park_cnt_flat','park_cnt_mach',
         'n_a_10', 'n_a_50', 'n_a_100', 'n_a_250', 'n_a_500', 'n_a_1000', 'n_a_5000', 'n_a_10000','n_c_10', 'n_c_50', 'n_c_100', 'n_c_250', 'n_c_500', 'n_c_1000', 'n_c_5000', 'n_c_10000',
         'area_kilometer','population_density','house_price_index','unemployment_rate','econ_rate','lending_rate','land_tx_count','land_price','steel_id']
+NumCatFeatList = ['建物現況格局-房','建物現況格局-廳','建物現況格局-衛','建物現況格局-隔間','交易筆棟數_土地','交易筆棟數_建物','交易筆棟數_停車位','floor','total_floor',
+                  'n_a_10', 'n_a_50', 'n_a_100', 'n_a_250', 'n_a_500', 'n_a_1000', 'n_a_5000', 'n_a_10000','n_c_10', 'n_c_50', 'n_c_100', 'n_c_250', 'n_c_500', 'n_c_1000', 'n_c_5000', 'n_c_10000']
+# housePriceIndex = 121.01
+# unEmpRate = 0.0364
+# econRate = 0.0314
+# lendingRate =0.01368
+# landNum = 158199
+# landIndex = 105.86
 
 # Inputs: 
 # Building => addr, age, area
@@ -43,8 +51,15 @@ def fillMissingFeature(inputData, groupData):
             tmp[catFeat] = groupData[catFeat].mode()[0] 
         
         for numFeat in NumFeatList:
+            isNumCat=False
+            for item in NumCatFeatList:
+                if numFeat == item:
+                    isNumCat=True
             if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='total_floor' and numFeat !='車位移轉總面積(坪)':
-                tmp[numFeat] = groupData[numFeat].mean()
+                if isNumCat:
+                    tmp[numFeat] = round(groupData[numFeat].mean(),0)
+                else:
+                    tmp[numFeat] = groupData[numFeat].mean()
         
     elif inputData['type'] == 'building':
         tmp['主建物面積'] = float(inputData['area'])
@@ -53,17 +68,38 @@ def fillMissingFeature(inputData, groupData):
             tmp[catFeat] = groupData[catFeat].mode()[0]
             
         for numFeat in NumFeatList:
+            isNumCat=False
+            for item in NumCatFeatList:
+                if numFeat == item:
+                    isNumCat=True
             if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='主建物面積':
-                tmp[numFeat] = groupData[numFeat].mean()
+                if isNumCat:
+                    tmp[numFeat] = round(groupData[numFeat].mean(),0)
+                else:
+                    tmp[numFeat] = groupData[numFeat].mean()
     else: # House
         tmp['far'] = float(inputData['far'])
         tmp['土地移轉總面積(坪)'] = float(inputData['trans1'])
-        
+        tmp['建物移轉總面積(坪)'] = float(inputData['trans2'])
         for catFeat in CatFeatList:
             tmp[catFeat] = groupData[catFeat].mode()[0]
         for numFeat in NumFeatList:
-            if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='far' and numFeat !='土地移轉總面積(坪)':
-                tmp[numFeat] = groupData[numFeat].mean()
+            isNumCat=False
+            for item in NumCatFeatList:
+                if numFeat == item:
+                    isNumCat=True
+            if numFeat != 'x座標' and numFeat !='y座標'and numFeat !='house_age'and numFeat !='far' and numFeat !='土地移轉總面積(坪)'and numFeat!='建物移轉總面積(坪)':
+                if isNumCat:
+                    tmp[numFeat] = round(groupData[numFeat].mean(),0)
+                else:
+                    tmp[numFeat] = groupData[numFeat].mean()
+    tmp['house_price_index'] = 121.01
+    tmp['unemployment_rate'] = 0.0364
+    tmp['econ_rate'] = 0.0314
+    tmp['lending_rate'] = 0.01368
+    tmp['land_tx_count'] = 158199
+    tmp['land_price'] = 105.86
+    tmp['steel_id'] = 1605.58
     return tmp
 
 # Using google API for converting the address => (lat, lon)
@@ -147,7 +183,7 @@ def getGroupLatLon(data):
         data.loc[idx, 'lat'] = tmp[0]
         data.loc[idx, 'lon'] = tmp[1]
         
-        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&key=AIzaSyCkBm3LspfsTiKQUh7EmHQV8bkwHnVFff0')
+        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&language=zh-TW&key=AIzaSyCkBm3LspfsTiKQUh7EmHQV8bkwHnVFff0')
         resJson = res.json()
         resJson = resJson['results'][0]
         addr = resJson['formatted_address'] # addr of data
