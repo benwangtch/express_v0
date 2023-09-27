@@ -13,7 +13,7 @@
 <body>
 	<div class="container">
 		<header>
-			<h1>House Price Evaluation System</h1>
+			<h1>Property Valuation System</h1>
 		</header>
 
 		<div class="user-container">
@@ -25,65 +25,65 @@
 			</div>
 			
 			<div class="middle-side">
-				<p class="title">2. Provide house features</p>
+				<p class="title">2. Enter Property Details</p>
 				<div id="building">
 					<div class="input-field">
 						<label>Address</label>
-						<input type="text" name="building-address">
+						<input type="text" name="building-address" placeholder="e.g. 臺中市南屯區文心路一段215號">
 					</div>
 					<div class="input-field">
 						<label>House Age</label>
-						<input type="text" name="building-age">
+						<input type="text" name="building-age" placeholder="e.g. 33">
 					</div>
 					<div class="input-field">
 						<label>Main Building Area</label>
-						<input type="text" name="building-area">
+						<input type="text" name="building-area" placeholder="e.g. 4.3">
 					</div>
 				</div>
 				<div id="apartment">
 					<div class="input-field">
 						<label>Address</label>
-						<input type="text" name="building-address">
+						<input type="text" name="building-address" placeholder="e.g. 臺中市南屯區文心路一段215號">
 					</div>
 					<div class="input-field">
 						<label>House Age</label>
-						<input type="text" name="building-age">
+						<input type="text" name="building-age" placeholder="e.g. 33">
 					</div>
 					<div class="input-field">
 						<label>Total Floors</label>
-						<input type="text" name="house-floors">
+						<input type="text" name="house-floors" placeholder="e.g. 20">
 					</div>
 					<div class="input-field">
 						<label>Parking Area</label>
-						<input type="text" name="house-parking">
+						<input type="text" name="house-parking" placeholder="e.g. 5.4">
 					</div>
 				</div>
 				<div id="house">
 					<div class="input-field">
 						<label>Address</label>
-						<input type="text" name="building-address">
+						<input type="text" name="building-address" placeholder="e.g. 臺中市南屯區文心路一段215號">
 					</div>
 					<div class="input-field">
 						<label>House Age</label>
-						<input type="text" name="building-age">
+						<input type="text" name="building-age" placeholder="e.g. 33">
 					</div>
 					<div class="input-field">
 						<label>Floor Area Ratio</label>
-						<input type="text" name="apartment-far">
+						<input type="text" name="apartment-far" placeholder="e.g. 3.4">
 					</div>
 					<div class="input-field">
 						<label>Land Transfer Area</label>
-						<input type="text" name="apartment-land-area">
+						<input type="text" name="apartment-land-area" placeholder="e.g. 4.56">
 					</div>
 					<div class="input-field">
 						<label>Building Transfer Area</label>
-						<input type="text" name="apartment-building-area">
+						<input type="text" name="apartment-building-area" placeholder="e.g. 4.01">
 					</div>
 				</div>
 			</div>
 			
 			<div class="right-side">
-				<button id="submitBtn" >Appraise</button>
+				<button id="submitBtn" >Valuate</button>
 				<div id="loader" class="loader"></div>
 			</div>
 			
@@ -93,7 +93,34 @@
 			<div id="map"></div>
 			<div id="evaluation-container">
 				<div class="eval-title">Evaluation Result</div>
-				<div class="table-wrapper">
+				<div class="table-wrapper0">
+					<table id='table-desc'>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				<div class = "eval-desc"> Five Most Similar Properties</div>
+				<div class="table-wrapper1">
 					<table id="eval-table">
 						<tr>
 							<th></th>
@@ -149,33 +176,6 @@
 							<td></td>
 							<td></td>
 							<td></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-				</div>
-				<div class = "eval-desc"> The final input and result (Based on the samples above)</div>
-				<div class="table-wrapper">
-					<table id='table-desc'>
-						<tr>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
-							<th></th>
 						</tr>
 						<tr>
 							<td></td>

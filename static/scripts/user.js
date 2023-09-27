@@ -192,21 +192,32 @@ function parseResponse(groupData, response) {
     ];
     var mapRenderFeatures = ['addr','lat','lon','建物現況格局-房','建物現況格局-衛','主建物面積','price_pin']
     
-    var thColor = 0;
-    var renderFeatures = [];
-    var houseRenderFeatures = ['addr', 'far', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'total_floor', '車位移轉總面積(坪)','population_density', '主建物面積', 'n_c_1000', 'price_pin']
-    var apartmentRenderFeatures = ['addr', 'house_age','total_floor', '車位移轉總面積(坪)','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'n_c_1000', 'price_pin']
-    var buildingRenderFeatures = ['addr', 'house_age','主建物面積','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density','total_floor', '車位移轉總面積(坪)', 'n_c_1000', 'price_pin']
     
+    var thColor = 0;
+    
+    var renderFeatures = [];
+    var renderFeaturesEnglish = [];
+    
+    var houseRenderFeatures = ['price_pin','addr', 'far', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'total_floor', '車位移轉總面積(坪)','population_density', '主建物面積', 'n_c_1000']
+    var houseRenderFeaturesEng = ['Price/pin', 'Address','Floor Area Ratio','House Age','Land Transfer Area', 'Building Transfer Area','Total Floor', 'Parking Area','Population Density', 'Main Building Area','n_c_1000']
+    
+    var apartmentRenderFeatures = ['price_pin','addr', 'house_age','total_floor', '車位移轉總面積(坪)','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'n_c_1000']
+    var apartmentRenderFeaturesEng = ['Price/pin', 'Address', 'House Age', 'Total Floor', 'Parking Area', 'Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area', 'Population Density', 'Main Building Area' ]
+    
+    var buildingRenderFeatures = ['price_pin','addr', 'house_age','主建物面積','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density','total_floor', '車位移轉總面積(坪)', 'n_c_1000']
+    var buildingRenderFeaturesEng  = ['Price/pin', 'Address', 'House Age','Main Building Area','Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area','Population Density','Total Floor', 'Parking Area','n_c_1000']
     if(response['output']['type']=='apartment'){
         renderFeatures = apartmentRenderFeatures;
-        thColor = 4;
+        renderFeaturesEnglish = apartmentRenderFeaturesEng;
+        thColor = 5;
     }else if(response['output']['type']=='house'){
         renderFeatures = houseRenderFeatures;
-        thColor = 5;
+        renderFeaturesEnglish = houseRenderFeaturesEng;
+        thColor = 6;
     }else{
         renderFeatures = buildingRenderFeatures;
-        thColor = 3;
+        renderFeaturesEnglish = buildingRenderFeaturesEng;
+        thColor = 4;
     }
 
     var mapGroupData = [
@@ -238,9 +249,9 @@ function parseResponse(groupData, response) {
         ['', '1.584118', '33.232033', '3.023834', '3.483861', '4049.0', '4.679535', '112.0', '305803.863048'],
         ];
     for (var i = 0; i < renderFeatures.length; i++){
-        outputInputData[0][i] = renderFeatures[i];
+        outputInputData[0][i] = renderFeaturesEnglish[i];
         var obj = response['output'][renderFeatures[i]];
-        if(i!=0){
+        if(i!=1){
             obj = parseFloat(obj);
             obj = roundTo(obj, 2);
         }
@@ -250,13 +261,13 @@ function parseResponse(groupData, response) {
     }
     for (var i = 0; i < renderFeatures.length; i++){
         var obj = groupData[renderFeatures[i]];
-        outputGroupData[0][i] = renderFeatures[i];
+        outputGroupData[0][i] = renderFeaturesEnglish[i];
         var j = 1;
         for (var key in obj){
           var value = obj[key];
           
           
-          if(i!=0){
+          if(i!=1){
             value = parseFloat(value);
             value = roundTo(value, 2);
           };
@@ -391,7 +402,7 @@ function parseResponse(groupData, response) {
 function initTable(data, colors) {
     var tbl = document.querySelector("#eval-table");
     var trs = tbl.getElementsByTagName('tr');
-    
+   
     for(var i=0; i<6; i++) {
         var tr = trs[i];
 
@@ -403,19 +414,26 @@ function initTable(data, colors) {
         for(var j=0; j<11; j++) {
             if(i == 0) {
                 var emt = document.createElement('th');
-                emt.style.backgroundColor = '#C0C0C0'
+                emt.style.backgroundColor = '#C0C0C0';
+                
             } else {
                 var emt = document.createElement('td');
+            }
+            if(j ==0){
+                emt.style.position = 'sticky';
+                emt.style.left = '0';
+                emt.style.zIndex = '1';
+                if(j==0 && i!=0){
+                    emt.style.backgroundColor ='#D3D3D3';
+                }
             }
             emt.style.color = colors[i][j];
             emt.innerHTML = data[i][j];
             tr.appendChild(emt);
         }
     }
-
-    // var desc = document.querySelector('div.eval-desc');
-    // desc.innerHTML = 'Based on 5 neighboring samples, predicted price is $302861.748846/pin.';
 }
+
 
 function initOutput(data, thColor){
     var tbl = document.querySelector("#table-desc");
@@ -440,8 +458,19 @@ function initOutput(data, thColor){
             if(j>=thColor && j!=10 && i!=0){
                 emt.style.color = '#C0C0C0';
             }
+            if(j ==0){
+                emt.style.position = 'sticky';
+                emt.style.left = '0';
+                emt.style.zIndex = '1';
+                if(j==0 && i!=0){
+                    emt.style.backgroundColor ='#D3D3D3';
+                }
+            }
             // emt.style.backgroundColor = '#696969';
             emt.innerHTML = data[i][j];
+            if (i==0 && j==0){
+                emt.innerHTML = 'Predict'
+            }
             tr.appendChild(emt);
         }
     }

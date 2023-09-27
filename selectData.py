@@ -15,12 +15,12 @@ def getSimilarData(inputData):
         groupNumList = [30, 20, 10, 5]
     elif inputData['type'] == 'building':
         data = pd.read_csv('./final_inference/all_building.csv')
-        groupNumList = [8, 6, 5]
+        groupNumList = [20, 6, 5]
     else:
         data = pd.read_csv('./final_inference/all_house.csv')
         groupNumList = [30, 20, 10, 5]
         
-    
+    # 408台灣台中市南屯區大墩六街287號	3.04	25.62	3.55	4.66
     # InputData will contain a Chinese address, need to be convert to (lat, long) either TWD97 or WGS84
     
     inputLoc = [0, 0] # Temporal, need to be turn by inputData['addr']

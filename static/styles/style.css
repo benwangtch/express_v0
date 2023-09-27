@@ -188,7 +188,7 @@ div.container {
                 text-decoration: none;
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                font-size: 1rem;
+                font-size: 1.4rem;
             }
 
             div.container > div.user-container > div.right-side > button:hover {
@@ -251,28 +251,31 @@ div.container {
 
                 display: flex;
                 flex-direction: row;
-                align-items: center;
+                align-items:center;
                 justify-content: center;
 
                 font-size: 1.4rem;
                 font-weight: bold;
             }
 
-            main > div#evaluation-container > div.table-wrapper {
+            main > div#evaluation-container > div.table-wrapper0 {
                 width: 100%;
-                height: 70%;
+                height: 30%;
             }
-
+            main > div#evaluation-container > div.table-wrapper1 {
+                width: 100%;
+                height: 80%;
+            }
             main > div#evaluation-container > div.eval-desc {
                 width: 100%;
                 height: 15%;
 
-                display: flex;
+                display:flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
 
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 font-weight: bold;
                 color: #000000;
                 text-align: center;
@@ -280,12 +283,13 @@ div.container {
 
                 main > div#evaluation-container table {
                     border-collapse: collapse;
+                    border-spacing: '0';
                     width: 100%;
                     text-align: center;
                     font-family: Arial, sans-serif;
                     background-color: #f7f7f7;
                     border-radius: 10px;
-
+                    
                     display: block;
                     overflow-x: auto;
                     white-space: nowrap;
