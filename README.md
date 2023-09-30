@@ -12,26 +12,12 @@ A house price prediction framework.
 ├── googleAPI.txt
 ├── imputeMissingValues.py
 ├── inference.py
-├── inference_sample_0.csv
 ├── model
 │   ├── 公寓all.pkl
 │   ├── 大樓all.pkl
 │   └── 透天厝all.pkl
-├── __pycache__
-│   ├── app.cpython-39.pyc
-│   ├── convertCoord.cpython-39.pyc
-│   ├── hello.cpython-311.pyc
-│   ├── hello.cpython-39.pyc
-│   ├── inference.cpython-39.pyc
-│   ├── reconstructFeatures.cpython-39.pyc
-│   ├── selectData.cpython-39.pyc
-│   ├── utils.cpython-310.pyc
-│   ├── utils.cpython-311.pyc
-│   └── utils.cpython-39.pyc
 ├── README.md
 ├── requirements.txt
-├── sample.csv
-├── sample_group_0.csv
 ├── selectProperties.py
 ├── static
 │   ├── scripts
@@ -46,5 +32,7 @@ A house price prediction framework.
 └── utils.py
 ```
 
-Run:
+## Installation
+Setup the environment.
+    conda create --name <env> --file requirements.txt
 flask --app app run
