@@ -11,14 +11,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello(): 
 	return render_template('index.html')
-# @app.route('/', methods = ['POST', 'GET'])
-# def data():
-#     if request.method == 'GET':
-#         return f"The URL /data is accessed directly. Try going to '/form' to submit form"
-#     if request.method == 'POST':
-#         form_data = request.form
-#         print(form_data)
-#         return render_template('data.html',form_data = form_data)
+
 
 @app.route('/process/<data>', methods=['POST'])
 def process(data):
@@ -41,7 +34,7 @@ def process(data):
     groupData = groupData.to_json()
 
     output={'groupData':groupData,'output':output }
-    
+    print('Inference done')
     return output
 
 if __name__=='__main__':

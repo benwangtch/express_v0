@@ -62,7 +62,7 @@ async function sendData() {
     }
     xhr.send();
     
-    await sleep(8000);
+    await sleep(6000);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
     
@@ -199,13 +199,14 @@ function parseResponse(groupData, response) {
     var renderFeaturesEnglish = [];
     
     var houseRenderFeatures = ['price_pin','addr', 'far', 'house_age', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'total_floor', '車位移轉總面積(坪)','population_density', '主建物面積', 'n_c_1000']
-    var houseRenderFeaturesEng = ['Price/pin', 'Address','Floor Area Ratio','House Age','Land Transfer Area', 'Building Transfer Area','Total Floor', 'Parking Area','Population Density', 'Main Building Area','n_c_1000']
+    var houseRenderFeaturesEng = ['Unit Price', 'Address','Floor Area Ratio','House Age','Land Transfer Area', 'Building Transfer Area','Total Floor', 'Parking Area','Population Density', 'Main Building Area','n_c_1000']
     
     var apartmentRenderFeatures = ['price_pin','addr', 'house_age','total_floor', '車位移轉總面積(坪)','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density', '主建物面積', 'n_c_1000']
-    var apartmentRenderFeaturesEng = ['Price/pin', 'Address', 'House Age', 'Total Floor', 'Parking Area', 'Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area', 'Population Density', 'Main Building Area' ]
+    var apartmentRenderFeaturesEng = ['Unit Price', 'Address', 'House Age', 'Total Floor', 'Parking Area', 'Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area', 'Population Density', 'Main Building Area','n_c_1000' ]
     
     var buildingRenderFeatures = ['price_pin','addr', 'house_age','主建物面積','far', '土地移轉總面積(坪)', '建物移轉總面積(坪)', 'population_density','total_floor', '車位移轉總面積(坪)', 'n_c_1000']
-    var buildingRenderFeaturesEng  = ['Price/pin', 'Address', 'House Age','Main Building Area','Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area','Population Density','Total Floor', 'Parking Area','n_c_1000']
+    var buildingRenderFeaturesEng  = ['Unit Price', 'Address', 'House Age','Main Building Area','Floor Area Ratio', 'Land Transfer Area', 'Building Transfer Area','Population Density','Total Floor', 'Parking Area','n_c_1000']
+    
     if(response['output']['type']=='apartment'){
         renderFeatures = apartmentRenderFeatures;
         renderFeaturesEnglish = apartmentRenderFeaturesEng;
@@ -469,7 +470,7 @@ function initOutput(data, thColor){
             // emt.style.backgroundColor = '#696969';
             emt.innerHTML = data[i][j];
             if (i==0 && j==0){
-                emt.innerHTML = 'Predict'
+                emt.innerHTML = 'Prediction'
             }
             tr.appendChild(emt);
         }

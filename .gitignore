@@ -2,3 +2,4 @@
 final_inference/
 env/
 *.txt
+*.ipynb
