@@ -26,19 +26,13 @@ NumFeatList = ['土地移轉總面積(坪)','建物移轉總面積(坪)','建物
         'area_kilometer','population_density','house_price_index','unemployment_rate','econ_rate','lending_rate','land_tx_count','land_price','steel_id']
 NumCatFeatList = ['建物現況格局-房','建物現況格局-廳','建物現況格局-衛','建物現況格局-隔間','交易筆棟數_土地','交易筆棟數_建物','交易筆棟數_停車位','floor','total_floor',
                   'n_a_10', 'n_a_50', 'n_a_100', 'n_a_250', 'n_a_500', 'n_a_1000', 'n_a_5000', 'n_a_10000','n_c_10', 'n_c_50', 'n_c_100', 'n_c_250', 'n_c_500', 'n_c_1000', 'n_c_5000', 'n_c_10000']
-# housePriceIndex = 121.01
-# unEmpRate = 0.0364
-# econRate = 0.0314
-# lendingRate =0.01368
-# landNum = 158199
-# landIndex = 105.86
 
 # Inputs: 
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
 # House => addr, age, far, land transfer, house transfer
 # Fill missing feature, Numerical feature => average, Catagorical data => the most catagory
-def fillMissingFeature(inputData, groupData):
+def imputeMissingValues(inputData, groupData):
     
     tmp  = pd.DataFrame(columns=allFeatList, index=[0])
     tmp['x座標'] = float(inputData['x座標'])
@@ -105,9 +99,9 @@ def fillMissingFeature(inputData, groupData):
     return tmp
 
 # Using google API for converting the address => (lat, lon)
-def getLatLong(inputData):
+def getLatLong(inputData, api):
     addr =inputData['addr']
-    res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={addr}&key=AIzaSyCkBm3LspfsTiKQUh7EmHQV8bkwHnVFff0')
+    res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={addr}&key={api[0]}')
     resJson = res.json()
     resJson = resJson['results'][0]
     latlng = resJson['geometry']['location']
@@ -175,20 +169,19 @@ def LatLontoTwd97(x,y):
     lat = radians(float(x))
     lon = radians(float(y))
     x, y = c.convert(lat, lon)
-    # tx = x/0.00000899823754
-    # ty = (y-121)*math.cos(math.radians(x))/0.000008983152841195214 + 250000
     return (y, x)
 
-def getGroupLatLon(data):
+def getGroupLatLon(data, api):
     for idx,item in data.iterrows():
         tmp = TWD97ToLatLon(item['x座標'],item['y座標'])
         data.loc[idx, 'lat'] = tmp[0]
         data.loc[idx, 'lon'] = tmp[1]
         
-        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&language=zh-TW&key=AIzaSyCkBm3LspfsTiKQUh7EmHQV8bkwHnVFff0')
+        res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?latlng={tmp[0]}, {tmp[1]}&language=zh-TW&key={api[0]}')
         resJson = res.json()
         resJson = resJson['results'][0]
-        addr = resJson['formatted_address'] # addr of data
+        # addr of data
+        addr = resJson['formatted_address'] 
         data.loc[idx, 'addr'] = addr
         
     return data

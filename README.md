@@ -9,7 +9,7 @@ A house price prediction framework.
 │   ├── all_apartment.csv
 │   ├── all_building.csv
 │   └── all_house.csv
-├── googleAPI.txt
+├── apikey.txt
 ├── imputeMissingValues.py
 ├── inference.py
 ├── model
@@ -33,6 +33,11 @@ A house price prediction framework.
 ```
 
 ## Installation
-Setup the environment.
+Recommand conda for setting up the environment, with other applications, the versions of the packages is shown in 'requirements.txt'.
+```
     conda create --name <env> --file requirements.txt
+```
+
+## Demonstration
+Due to confidencial issues, 
 flask --app app run

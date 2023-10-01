@@ -4,10 +4,6 @@ import joblib
 import json
 
 def inference(type,inferenceData, inputData):
-    
-    # print("-----The shape is", inferenceData.shape)
-    inferenceData.to_csv('./sample.csv', index=False)
-
     if type == 'apartment':
         type = '公寓'
     elif type == 'building':
@@ -18,7 +14,6 @@ def inference(type,inferenceData, inputData):
                         n_estimators=1000, 
                         learning_rate = 0.01, 
                         # num_leaves = 32, 
-                        
                         metric = 'mape')
     gbm = joblib.load(f'./model/{type}all.pkl')
     pred = gbm.predict(inferenceData)
