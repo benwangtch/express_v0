@@ -1,3 +1,10 @@
+
+"""This object provide method for converting lat/lon coordinate to TWD97
+    coordinate
+
+    The code reference to
+    https://blog.ez2learn.com/2009/08/15/lat-lon-to-twd97/
+"""
 from math import tan, sin, cos, radians
 import math
 

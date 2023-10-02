@@ -1,7 +1,7 @@
 # Express
 A house price prediction framework.<br/>
 
-![Alt text](https://drive.google.com/uc?export=view&id=10HgFps0uZDbdrqO6LACCrVOtQeuCUp0n "This is some image...")
+![Image](https://drive.google.com/uc?export=view&id=10HgFps0uZDbdrqO6LACCrVOtQeuCUp0n "Interface of EXPRESS")
 
 ## Directory Structure
 ``` Bash
@@ -44,7 +44,7 @@ Recommand conda for setting up the environment, with other applications, the ver
 ```
 conda create --name <env> --file requirements.txt
 ```
-We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, the put you api key in a file `./apiKey.txt`.<br />
+We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
 Due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
@@ -53,7 +53,7 @@ Due to confidential issue, the complete dataset which is in the folder './data/'
 flask --app app_demo run
 ```
 
-For each property type, we randomly selected one property for demonstration.First, choose a property type.Second, enter the corresponding values for each property type then press **valuate**.
+For each property type, we randomly selected one property for demonstration. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
 | Property Type | Address |  House Age  | Main Building Area |
 |:-----|:--------:|:--------:|------:|
 | Building | 台中市南屯區文心路一段215號   | 33 | 4.3 |
@@ -67,4 +67,8 @@ For each property type, we randomly selected one property for demonstration.Firs
 |:-----|:--------:|:--------:|:------:|:------:|------:|
 | House | 高雄市苓雅區林森二路7-7號   | 40 | 3.4 | 3.2 | 4.1 |
 
-The results of above are the same as the original system, we simply saved the dataframe selected by the function `getSimilarProperties(inputData)` in `selectProperties.py` to the folder `./demo/`.
+The results of above are the same as the original system, we simply saved the dataframe selected by the function `getSimilarProperties(inputData)` from `selectProperties.py` to the folder `./demo/`.
+
+### References
+[LightGBM](https://github.com/microsoft/LightGBM "@embed")
+[Coordinate Convertion](https://blog.ez2learn.com/2009/08/15/lat-lon-to-twd97/ "@embed")

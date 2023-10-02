@@ -117,6 +117,13 @@ def getLatLong(inputData, api):
     print(inputData)
     return inputData
 
+
+"""This object provide method for converting lat/lon coordinate and TWD97
+    coordinate
+
+    The code reference to
+    https://blog.ez2learn.com/2009/08/15/lat-lon-to-twd97/
+"""
 def TWD97ToLatLon(x, y):
     dx = 250000
     dy = 0
