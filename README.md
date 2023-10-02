@@ -42,7 +42,8 @@ Recommand conda for setting up the environment, with other applications, the ver
 ```
 conda create --name <env> --file requirements.txt
 ```
-
+We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, the put you api key in a file `./apiKey.txt`.
+[Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
 Due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
 
@@ -50,27 +51,18 @@ Due to confidential issue, the complete dataset which is in the folder './data/'
 flask --app app_demo run
 ```
 
-For each property type, we randomly selected one property for demonstration, enter the corresponding values for each property type, 
-#### Building
-| Address |  House Age  | Main Building Area |
-|:-----|:--------:|------:|
-| 台中市南屯區文心路一段215號   | 33 | 4.3 |
+For each property type, we randomly selected one property for demonstration.First, choose a property type.Second, enter the corresponding values for each property type then press **valuate**.
+| Property Type | Address |  House Age  | Main Building Area |
+|:-----|:--------:|:--------:|------:|
+| Building | 台中市南屯區文心路一段215號   | 33 | 4.3 |
 
 
-#### Apartment
-| Address |  House Age  | Total Floors | Parking Area |
-|:-----|:--------:|:------:|------:|
-| 新北市永和區國中路28號   | 33 | 5 | 0 |
+| Property Type | Address |  House Age  | Total Floors | Parking Area |
+|:-----|:--------:|:--------:|:------:|------:|
+| Apartment | 新北市永和區國中路28號   | 33 | 5 | 0 |
 
-#### House
-| Address |  House Age  | Floor Area Ratio | Land Transfer Area | Building Transfer Area |
-|:-----|:--------:|:------:|:------:|------:|
-| 高雄市苓雅區林森二路7-7號   | 40 | 3.4 | 3.2 | 4.1 |
-```
-Address: 高雄市苓雅區林森二路7-7號, House Age: 40, Floor Area Ratio: 3.4, Land Transfer Area: 3.2, Building Transfer Area: 4.1
-```
-| Left |  Center  | Right |
-|:-----|:--------:|------:|
-| L0   | **bold** | $1600 |
-| L1   |  `code`  |   $12 |
-| L2   | _italic_ |    $1 |
+| Property Type | Address |  House Age  | Floor Area Ratio | Land Transfer Area | Building Transfer Area |
+|:-----|:--------:|:--------:|:------:|:------:|------:|
+| House | 高雄市苓雅區林森二路7-7號   | 40 | 3.4 | 3.2 | 4.1 |
+
+The results of above are the same as the original system, we simply saved the dataframe selected by the function `getSimilarProperties(inputData)` in `selectProperties.py` to the folder `./demo/`.

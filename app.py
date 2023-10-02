@@ -26,7 +26,7 @@ def process(data):
     # Convert from TWD97 to LatLon
     inputData = getLatLong(inputData, api) 
     
-    groupData = getSimilarData(inputData)
+    groupData = getSimilarProperties(inputData)
     # For Case study
     groupData.to_csv('./similar_data.csv', index=False) 
     inferenceData = imputeMissingValues(inputData, groupData)

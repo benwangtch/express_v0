@@ -9,7 +9,7 @@ import numpy as np
 # House => addr, age, far, land transfer, house transfer
 
 # inputData = {'type':building, 'x座標':0, 'y座標':0, 'house_age':10,...}
-def getSimilarData(inputData):
+def getSimilarProperties(inputData):
     if inputData['type'] == 'apartment':
         data = pd.read_csv('./data/all_apartment.csv')
         groupNumList = [30, 20, 10, 5]
