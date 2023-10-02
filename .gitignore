@@ -1,5 +1,4 @@
-*.csv
-final_inference/
+data/
 env/
-*.txt
+apiKey.txt
 *.ipynb

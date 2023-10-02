@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import json
 import ast
+import pandas as pd
 from utils import *
 from selectProperties import *
 from featureImputation import *
@@ -24,16 +25,19 @@ def process(data):
     except:
         print('ERROR: API key file might be missing.')
     # Convert from TWD97 to LatLon
+    
     inputData = getLatLong(inputData, api) 
     
-    groupData = getSimilarData(inputData)
-    # For Case study
-    groupData.to_csv('./similar_data.csv', index=False) 
+    # Demo Version: Read similar data from ./demo/, five similar datas are provided for each property type.
+    if inputData['type'] == 'building':
+        groupData = pd.read_csv('./demo/building_demo.csv', index_col=None)
+    elif inputData['type'] == 'apartment':
+        groupData = pd.read_csv('./demo/apartment_demo.csv', index_col=None)
+    else:
+        groupData = pd.read_csv('./demo/house_demo.csv', index_col=None)
+    
     inferenceData = imputeMissingValues(inputData, groupData)
     
-    # For Case study
-    outputInf = pd.DataFrame(inferenceData) 
-    outputInf.to_csv('./inference_data.csv', index=False) 
     output = inference(inputData['type'], inferenceData, inputData)
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)

@@ -62,7 +62,7 @@ async function sendData() {
     }
     xhr.send();
     
-    await sleep(6000);
+    await sleep(8000);
     loader.style.display = 'none';
     submitBtn.style.display = 'block';
     
@@ -456,7 +456,7 @@ function initOutput(data, thColor){
             } else {
                 var emt = document.createElement('td');
             }
-            if(j>=thColor && j!=10 && i!=0){
+            if(j>=thColor && i!=0){
                 emt.style.color = '#C0C0C0';
             }
             if(j ==0){
@@ -467,7 +467,7 @@ function initOutput(data, thColor){
                     emt.style.backgroundColor ='#D3D3D3';
                 }
             }
-            // emt.style.backgroundColor = '#696969';
+            
             emt.innerHTML = data[i][j];
             if (i==0 && j==0){
                 emt.innerHTML = 'Prediction'

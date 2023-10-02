@@ -35,9 +35,9 @@ A house price prediction framework.
 ## Installation
 Recommand conda for setting up the environment, with other applications, the versions of the packages is shown in 'requirements.txt'.
 ```
-    conda create --name <env> --file requirements.txt
+conda create --name <env> --file requirements.txt
 ```
 
 ## Demonstration
-Due to confidencial issues, 
+Due to confidential issues, the 
 flask --app app run

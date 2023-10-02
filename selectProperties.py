@@ -11,19 +11,16 @@ import numpy as np
 # inputData = {'type':building, 'x座標':0, 'y座標':0, 'house_age':10,...}
 def getSimilarData(inputData):
     if inputData['type'] == 'apartment':
-        data = pd.read_csv('./final_inference/all_apartment.csv')
+        data = pd.read_csv('./data/all_apartment.csv')
         groupNumList = [30, 20, 10, 5]
     elif inputData['type'] == 'building':
-        data = pd.read_csv('./final_inference/all_building.csv')
+        data = pd.read_csv('./data/all_building.csv')
         groupNumList = [20, 6, 5]
     else:
-        data = pd.read_csv('./final_inference/all_house.csv')
+        data = pd.read_csv('./data/all_house.csv')
         groupNumList = [30, 20, 10, 5]
         
-    # 408台灣台中市南屯區大墩六街287號	3.04	25.62	3.55	4.66
     # InputData will contain a Chinese address, need to be convert to (lat, long) either TWD97 or WGS84
-    
-    inputLoc = [0, 0] # Temporal, need to be turn by inputData['addr']
     groupByDist = []
     groupByDist = selectByDist(data, groupNumList[0], [inputData['x座標'], inputData['y座標']], groupByDist)
     
