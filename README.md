@@ -69,6 +69,6 @@ For each property type, we randomly selected one property for demonstration. Fir
 
 The results of above are the same as the original system, we simply saved the dataframe selected by the function `getSimilarProperties(inputData)` from `selectProperties.py` to the folder `./demo/`.
 
-### References
+## References
 [LightGBM](https://github.com/microsoft/LightGBM "@embed") <br/>
 [Coordinate Convertion](https://blog.ez2learn.com/2009/08/15/lat-lon-to-twd97/ "@embed")
