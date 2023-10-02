@@ -52,7 +52,7 @@ flask --app app_demo run
 For each property type, we randomly selected one property for demonstration, 
 ### Building
 ```
-Address: '台中市南屯區文心路一段215號', House Age: '33', Main Building Area: '4.3'
+Address: 台中市南屯區文心路一段215號, House Age: 33, Main Building Area: 4.3
 ```
 
 ### Apartment
@@ -63,3 +63,8 @@ Address: 新北市永和區國中路28號, House Age: 33, Total Floors: 5, Parki
 ```
 Address: 高雄市苓雅區林森二路7-7號, House Age: 40, Floor Area Ratio: 3.4, Land Transfer Area: 3.2, Building Transfer Area: 4.1
 ```
+| Left |  Center  | Right |
+|:-----|:--------:|------:|
+| L0   | **bold** | $1600 |
+| L1   |  `code`  |   $12 |
+| L2   | _italic_ |    $1 |
