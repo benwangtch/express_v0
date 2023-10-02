@@ -49,18 +49,23 @@ Due to confidential issue, the complete dataset which is in the folder './data/'
 ```
 flask --app app_demo run
 ```
-For each property type, we randomly selected one property for demonstration, 
-### Building
+
+For each property type, we randomly selected one property for demonstration, enter the corresponding values for each property type, 
+#### Building
 | Address |  House Age  | Main Building Area |
 |:-----|:--------:|------:|
 | 台中市南屯區文心路一段215號   | 33 | 4.3 |
 
 
-### Apartment
-```
-Address: 新北市永和區國中路28號, House Age: 33, Total Floors: 5, Parking Area: 0
-```
-### House 
+#### Apartment
+| Address |  House Age  | Total Floors | Parking Area |
+|:-----|:--------:|:------:|------:|
+| 新北市永和區國中路28號   | 33 | 5 | 0 |
+
+#### House
+| Address |  House Age  | Floor Area Ratio | Land Transfer Area | Building Transfer Area |
+|:-----|:--------:|:------:|:------:|------:|
+| 高雄市苓雅區林森二路7-7號   | 40 | 3.4 | 3.2 | 4.1 |
 ```
 Address: 高雄市苓雅區林森二路7-7號, House Age: 40, Floor Area Ratio: 3.4, Land Transfer Area: 3.2, Building Transfer Area: 4.1
 ```
