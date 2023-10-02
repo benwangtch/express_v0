@@ -51,9 +51,10 @@ flask --app app_demo run
 ```
 For each property type, we randomly selected one property for demonstration, 
 ### Building
-```
-Address: 台中市南屯區文心路一段215號, House Age: 33, Main Building Area: 4.3
-```
+| Address |  House Age  | Main Building Area |
+|:-----|:--------:|------:|
+| 台中市南屯區文心路一段215號   | 33 | 4.3 |
+
 
 ### Apartment
 ```
