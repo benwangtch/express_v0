@@ -60,7 +60,7 @@ However, due to confidential issue, the complete dataset which is in the folder 
 flask --app app_demo run
 ```
 
-For each property type, we randomly selected one property for demonstration, then saved the similar data selected in `./demo`. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
+For each property type, we randomly selected one property for demonstration, then saved the grouped similar data in `./demo/`. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
 | Property Type | Address |  House Age  | Main Building Area |
 |:-----|:--------:|:--------:|------:|
 | Building | 台中市南屯區文心路一段215號   | 33 | 4.3 |
