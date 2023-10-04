@@ -47,6 +47,9 @@ conda create --name <env> --file requirements.txt
 We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `./static/scripts/map.js`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
+Here are four steps for the valuation.<br />
+1. Select the property type.$\,\to\,$Enter property details.$\,\to\,$Get the valuation result.$\,\to\,$Verify the result with pairwise explanation.
+![Image](https://drive.google.com/uc?export=view&id=1swjacyLu4C3E-f9TfKzevgZjFvEARsIt "Steps of EXPRESS")
 Due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
 
 ```
