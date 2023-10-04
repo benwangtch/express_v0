@@ -42,7 +42,7 @@ System screenshot after valuation.<br/>
 ## Installation
 Recommand conda for setting up the environment, with other applications, the versions of the packages is shown in 'requirements.txt'.
 ```
-conda create --name <env> --file requirements.txt
+    conda create --name <env> --file requirements.txt
 ```
 We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `./static/scripts/map.js`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
@@ -57,7 +57,7 @@ Here are the four steps for the valuation system.<br />
 However, due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
 
 ```
-flask --app app_demo run
+    flask --app app_demo run
 ```
 
 For each property type, we randomly selected one property for demonstration, then saved the grouped similar data in `./demo/`. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
