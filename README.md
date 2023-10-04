@@ -1,5 +1,5 @@
-# Express
-EXPRESS: A Model-Agnostic Explainable Property Valuation System.<br/>
+# EXPRESS: A Model-Agnostic Explainable Property Valuation System.
+System screenshot after valuation.<br/>
 
 ![Image](https://drive.google.com/uc?export=view&id=10HgFps0uZDbdrqO6LACCrVOtQeuCUp0n "Interface of EXPRESS")
 
