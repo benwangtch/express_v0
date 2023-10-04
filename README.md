@@ -51,7 +51,7 @@ Recommand conda for setting up the environment, with other applications, the ver
 We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `./static/scripts/map.js`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
-Here are the four steps for the valuation system.<br />
+The screenshots below shows the four steps of our system.<br />
 1. Select the property type.
 2. Enter property details.
 3. Get the valuation result.
