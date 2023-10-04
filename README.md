@@ -1,7 +1,7 @@
 # EXPRESS: A Model-Agnostic Explainable Property Valuation System.
 System screenshot after valuation.<br/>
 
-![Image](https://drive.google.com/uc?export=view&id=10HgFps0uZDbdrqO6LACCrVOtQeuCUp0n "Interface of EXPRESS")
+![Image](/assests/images/express.png "Interface of EXPRESS")
 
 ## Directory Structure
 ``` Bash
@@ -26,6 +26,10 @@ System screenshot after valuation.<br/>
 ├── README.md
 ├── requirements.txt
 ├── selectProperties.py
+├── assests
+│   └── images
+│       ├── express.png
+│       └── steps.png
 ├── static
 │   ├── scripts
 │   │   ├── map.js
@@ -52,7 +56,7 @@ Here are the four steps for the valuation system.<br />
 2. Enter property details.
 3. Get the valuation result.
 4. Verify the result with pairwise explanation and the location relationship shown on map.
-![Image](https://drive.google.com/uc?export=view&id=1swjacyLu4C3E-f9TfKzevgZjFvEARsIt "Steps of EXPRESS")<br />
+![Image](/assests/images/steps.png "Steps of EXPRESS")<br />
 
 However, due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
 
