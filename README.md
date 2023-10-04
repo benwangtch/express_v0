@@ -1,5 +1,5 @@
 # Express
-A house price prediction framework.<br/>
+EXPRESS: A Model-Agnostic Explainable Property Valuation System.<br/>
 
 ![Image](https://drive.google.com/uc?export=view&id=10HgFps0uZDbdrqO6LACCrVOtQeuCUp0n "Interface of EXPRESS")
 
@@ -44,7 +44,7 @@ Recommand conda for setting up the environment, with other applications, the ver
 ```
 conda create --name <env> --file requirements.txt
 ```
-We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `map.js`.<br />
+We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `./static/scripts/map.js`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
 Due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
@@ -53,7 +53,7 @@ Due to confidential issue, the complete dataset which is in the folder './data/'
 flask --app app_demo run
 ```
 
-For each property type, we randomly selected one property for demonstration. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
+For each property type, we randomly selected one property for demonstration, then saved the similar data selected in `./demo`. First, choose a property type. Second, enter the corresponding values for each property type then press **valuate**.
 | Property Type | Address |  House Age  | Main Building Area |
 |:-----|:--------:|:--------:|------:|
 | Building | 台中市南屯區文心路一段215號   | 33 | 4.3 |
