@@ -4,6 +4,16 @@ import joblib
 import json
 
 def inference(type,inferenceData, inputData):
+    """Predict the unit price of input by LightGBM, using different model weight for each property type.
+
+    Args:
+        type (str): The property type.
+        inferenceData (DataFrame): The inference data.
+        inputData (json): The original inputData with converted coordinates for calculating the distances.
+
+    Returns:
+        json: A json file with informations including the prediction price.
+    """
     if type == 'apartment':
         type = '公寓'
     elif type == 'building':

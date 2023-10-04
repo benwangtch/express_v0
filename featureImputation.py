@@ -33,7 +33,15 @@ NumCatFeatList = ['建物現況格局-房','建物現況格局-廳','建物現�
 # House => addr, age, far, land transfer, house transfer
 # Fill missing feature, Numerical feature => average, Catagorical data => the most catagory
 def imputeMissingValues(inputData, groupData):
-    
+    """Impute the missing values by similar data.
+
+    Args:
+        inputData (json): The original inputData with converted coordinates for calculating the distances.
+        groupData (DataFrame): The most similar five data grouped by input features.
+
+    Returns:
+        DataFrame: The imputed inputData for inference.
+    """
     tmp  = pd.DataFrame(columns=allFeatList, index=[0])
     tmp['x座標'] = float(inputData['x座標'])
     tmp['y座標'] = float(inputData['y座標'])
@@ -100,6 +108,15 @@ def imputeMissingValues(inputData, groupData):
 
 # Using google API for converting the address => (lat, lon)
 def getLatLong(inputData, api):
+    """The function used to convert the input address to (Lat, Lng)
+    
+    Args:
+        inputData (json): The original input from users.
+        api: The api key read from apiKey.txt. 
+    
+    Returns:
+        inputData: Added the keys of converted coordinates.
+    """
     addr =inputData['addr']
     res = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?address={addr}&key={api[0]}')
     resJson = res.json()
@@ -179,6 +196,15 @@ def LatLontoTwd97(x,y):
     return (y, x)
 
 def getGroupLatLon(data, api):
+    """Get the groupData Lat,Lng and address to plot on the map.
+
+    Args:
+        data (DataFrame): The grouped data.
+        api (str): The api key read from apiKey.txt.
+
+    Returns:
+        DataFrame: With address and Lat,Lng.
+    """
     for idx,item in data.iterrows():
         tmp = TWD97ToLatLon(item['x座標'],item['y座標'])
         data.loc[idx, 'lat'] = tmp[0]

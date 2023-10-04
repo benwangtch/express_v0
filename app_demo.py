@@ -16,6 +16,15 @@ def hello():
 
 @app.route('/process/<data>', methods=['POST'])
 def process(data):
+    """The api used to get input from user, run all the algorithms and 
+    output the five similar data and prediction.
+
+    Args:
+        data (json): The original input from users.
+
+    Returns:
+        output: A json format with two keys, groupData and output.
+    """
     inputData = ast.literal_eval(data)
     api = []
     try:

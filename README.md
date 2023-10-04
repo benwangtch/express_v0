@@ -44,7 +44,7 @@ Recommand conda for setting up the environment, with other applications, the ver
 ```
 conda create --name <env> --file requirements.txt
 ```
-We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`.<br />
+We used the service, geocoding, which is provided by Google. So for demonstration, you will need to apply for a api key from the site below, then put your **api key** in file `./apiKey.txt`, and in the second line of `map.js`.<br />
 [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/start?hl=zh-tw "@embed")
 ## Demonstration
 Due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.

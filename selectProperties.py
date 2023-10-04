@@ -7,9 +7,16 @@ import numpy as np
 # Building => addr, age, area
 # apartment => addr, age, total_floor, parking_area
 # House => addr, age, far, land transfer, house transfer
-
 # inputData = {'type':building, 'x座標':0, 'y座標':0, 'house_age':10,...}
 def getSimilarProperties(inputData):
+    """Get the most similar datas by parameter filtering, base on different property type input features.
+
+    Args:
+        inputData (json): The original inputData with converted coordinates for calculating the distances.
+
+    Returns:
+        DataFrame: Returns the most similar five data after filtering.
+    """
     if inputData['type'] == 'apartment':
         data = pd.read_csv('./data/all_apartment.csv')
         groupNumList = [30, 20, 10, 5]
