@@ -51,7 +51,7 @@ Here are the four steps for the valuation system.<br />
 1. Select the property type.
 2. Enter property details.
 3. Get the valuation result.
-4. Verify the result with pairwise explanation.
+4. Verify the result with pairwise explanation and the location relationship shown on map.
 ![Image](https://drive.google.com/uc?export=view&id=1swjacyLu4C3E-f9TfKzevgZjFvEARsIt "Steps of EXPRESS")<br />
 
 However, due to confidential issue, the complete dataset which is in the folder './data/' can't be provided. Alternatively, we provide a demo version, which can be ran by the command below.
