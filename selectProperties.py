@@ -35,6 +35,8 @@ def getSimilarProperties(inputData):
     groupByAge = selectByAge(groupByDist, groupNumList[1], inputData['age'], groupByAge)
     
     if inputData['type'] == 'apartment':
+        # Convert the features taken log while training
+        inputData['car'] = take_log(inputData['car'])
         groupByTotalFloor = []
         groupByTotalFloor = selectByTotalFloor(groupByAge, groupNumList[2], inputData['floor'], groupByTotalFloor )
         
@@ -42,10 +44,15 @@ def getSimilarProperties(inputData):
         groupByParking = selectByParking(groupByTotalFloor, groupNumList[3], inputData['car'], groupByParking)
         return groupByParking
     elif inputData['type'] == 'building':
+        # Convert the features taken log while training
+        inputData['area'] = take_log(inputData['area'])
         groupByArea = []
         groupByArea = selectByArea(groupByAge, groupNumList[2], inputData['area'], groupByArea)
         return groupByArea
     else:
+        # Convert the features taken log while training
+        inputData['trans1'] = take_log(inputData['trans1'])
+        inputData['trans2'] = take_log(inputData['trans2'])
         groupByFar = []
         groupByFar = selectByFar(groupByAge, groupNumList[2], inputData['far'], groupByFar)
         
@@ -53,7 +60,13 @@ def getSimilarProperties(inputData):
         groupByLandTransfer = selectByLandTransfer(groupByFar, groupNumList[3], inputData['trans1'], groupByLandTransfer)
         return groupByLandTransfer
         
-            
+def take_log(x):
+    x = float(x)
+    if x>0:
+        return math.log(x)
+    else:
+        return 0.  
+           
 
 # Select data by (lat, long)
 def selectByDist(data, groupNum, inputLoc, groupByDist):
@@ -139,3 +152,16 @@ def selectByLandTransfer(data, groupNum, inputLandTransfer, groupByLandTransfer)
     groupByLandTransfer = np.argpartition(landTransfer, groupNum)
     groupByLandTransfer = data.iloc[groupByLandTransfer[:groupNum]]
     return groupByLandTransfer
+def take_exp(x):
+    x = float(x)
+    if x > 0:
+        return math.exp(x)
+    else:
+        return 0
+def convertGroupNumFeat(type, groupData):
+        groupData['車位移轉總面積(坪)'] = groupData['車位移轉總面積(坪)'].apply(take_exp)
+        groupData['主建物面積'] = groupData['主建物面積'].apply(take_exp)
+        
+        groupData['土地移轉總面積(坪)'] = groupData['土地移轉總面積(坪)'].apply(take_exp)
+        groupData['建物移轉總面積(坪)'] = groupData['建物移轉總面積(坪)'].apply(take_exp)
+        return groupData

@@ -126,12 +126,10 @@ def getLatLong(inputData, api):
     inputData['lat'] = latlng['lat']
     inputData['lon'] = latlng['lng']
     
-    print(latlng['lat'],latlng['lng'])
     # Turn lat lon to TWD97 latlon
     lat, lng = LatLontoTwd97(latlng['lat'],latlng['lng'] )
     inputData['x座標'] = lng
     inputData['y座標'] = lat   
-    print(inputData)
     return inputData
 
 

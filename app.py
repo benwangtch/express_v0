@@ -39,13 +39,13 @@ def process(data):
     # For Case study
     # groupData.to_csv('./similar_data.csv', index=False) 
     inferenceData = imputeMissingValues(inputData, groupData)
-    
     # For Case study
     # outputInf = pd.DataFrame(inferenceData) 
     # outputInf.to_csv('./inference_data.csv', index=False) 
     output = inference(inputData['type'], inferenceData, inputData)
     # Get LatLon and addr for groupData to show on map
     groupData = getGroupLatLon(groupData, api)
+    groupData = convertGroupNumFeat(inputData['type'], groupData)
     groupData = groupData.to_json()
 
     output={'groupData':groupData,'output':output }
